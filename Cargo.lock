@@ -4767,8 +4767,6 @@ dependencies = [
 [[package]]
 name = "revm-interpreter"
 version = "15.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7dcab7ef2064057acfc84731205f4bc77f4ec1b35630800b26ff6a185731c5ab"
 dependencies = [
  "revm-primitives",
  "serde",
@@ -4970,6 +4968,7 @@ dependencies = [
  "reth-primitives-traits",
  "reth-trie",
  "revm",
+ "revm-interpreter",
  "revm-primitives",
  "rsp-client-executor",
  "rsp-mpt",
