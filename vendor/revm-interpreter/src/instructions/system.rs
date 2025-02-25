@@ -4,6 +4,8 @@ use crate::{
     Host, InstructionResult, Interpreter,
 };
 use core::ptr;
+use revm_primitives::FixedBytes;
+use sha3_unconstrained::{Digest, Keccak256};
 
 pub fn keccak256<H: Host + ?Sized>(interpreter: &mut Interpreter, _host: &mut H) {
     pop_top!(interpreter, offset, len_ptr);
@@ -14,7 +16,10 @@ pub fn keccak256<H: Host + ?Sized>(interpreter: &mut Interpreter, _host: &mut H)
     } else {
         let from = as_usize_or_fail!(interpreter, offset);
         resize_memory!(interpreter, from, len);
-        crate::primitives::keccak256(interpreter.shared_memory.slice(from, len))
+        // crate::primitives::keccak256(interpreter.shared_memory.slice(from, len))
+        let mut hasher = Keccak256::new();
+        hasher.update(interpreter.shared_memory.slice(from, len).as_ref());
+        FixedBytes::try_from(hasher.finalize().as_slice()).unwrap()
     };
     *len_ptr = hash.into();
 }

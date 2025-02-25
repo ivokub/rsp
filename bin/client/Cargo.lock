@@ -237,7 +237,7 @@ dependencies = [
  "ruint",
  "rustc-hash",
  "serde",
- "sha3",
+ "sha3 0.10.8 (git+https://github.com/sp1-patches/RustCrypto-hashes?tag=patch-sha3-0.10.8-sp1-4.0.0)",
  "tiny-keccak",
 ]
 
@@ -3101,6 +3101,7 @@ dependencies = [
  "bincode",
  "log",
  "rsp-client-executor",
+ "sha3 0.10.8",
  "sp1-zkvm",
  "tracing",
 ]
@@ -3409,6 +3410,14 @@ dependencies = [
  "cfg-if",
  "cpufeatures",
  "digest 0.10.7",
+]
+
+[[package]]
+name = "sha3"
+version = "0.10.8"
+dependencies = [
+ "digest 0.10.7",
+ "keccak",
 ]
 
 [[package]]
