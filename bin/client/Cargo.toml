@@ -19,6 +19,7 @@ tracing = { version = "0.1", features = [
     "max_level_off",
     "release_max_level_off",
 ] }
+revm-interpreter = { version = "15.2.0", default-features = false }
 
 [patch.crates-io]
 # Precompile patches

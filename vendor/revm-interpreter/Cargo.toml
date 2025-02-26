@@ -58,6 +58,7 @@ default-features = false
 git = "https://github.com/ivokub/RustCrypto-hashes"
 rev = "9facce43"
 package = "sha3"
+optional = true
 
 [dev-dependencies.bincode]
 version = "1.3"
@@ -102,6 +103,8 @@ parse = ["dep:paste", "dep:phf"]
 portable = ["revm-primitives/portable"]
 serde = ["dep:serde", "revm-primitives/serde"]
 std = ["serde?/std", "revm-primitives/std"]
+
+unconstrained-sha3 = ["sha3-unconstrained"]
 
 [lints.rust]
 rust_2018_idioms = "deny"

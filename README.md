@@ -182,3 +182,9 @@ cargo prove build --ignore-rust-version
 ### What are good testing blocks
 
 A good small block to test on for Ethereum mainnet is: `20526624`.
+
+
+# Benchmarking opcodes
+There are targets `just run-block` and `just run-block-unconstrained-sha3` which run the respective provers with and without proving the Keccak opcodes. Use the following environment variables:
+* RPC_1 - set the RPC URL for fetching blocks
+* SP1_PROVER - set to 'cpu' or 'cuda'

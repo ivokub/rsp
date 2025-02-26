@@ -237,7 +237,7 @@ dependencies = [
  "ruint",
  "rustc-hash",
  "serde",
- "sha3 0.10.8 (git+https://github.com/sp1-patches/RustCrypto-hashes?tag=patch-sha3-0.10.8-sp1-4.0.0)",
+ "sha3",
  "tiny-keccak",
 ]
 
@@ -3012,7 +3012,6 @@ version = "15.2.0"
 dependencies = [
  "revm-primitives",
  "serde",
- "sha3 0.10.8 (git+https://github.com/ivokub/RustCrypto-hashes?rev=9facce43)",
 ]
 
 [[package]]
@@ -3099,6 +3098,7 @@ version = "0.0.0"
 dependencies = [
  "bincode",
  "log",
+ "revm-interpreter",
  "rsp-client-executor",
  "sp1-zkvm",
  "tracing",
@@ -3417,16 +3417,6 @@ source = "git+https://github.com/sp1-patches/RustCrypto-hashes?tag=patch-sha3-0.
 dependencies = [
  "digest 0.10.7",
  "keccak",
-]
-
-[[package]]
-name = "sha3"
-version = "0.10.8"
-source = "git+https://github.com/ivokub/RustCrypto-hashes?rev=9facce43#9facce43a9b132314e0b62080afb9305d6228b40"
-dependencies = [
- "digest 0.10.7",
- "keccak",
- "sp1-zkvm",
 ]
 
 [[package]]
