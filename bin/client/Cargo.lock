@@ -3009,11 +3009,10 @@ dependencies = [
 [[package]]
 name = "revm-interpreter"
 version = "15.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7dcab7ef2064057acfc84731205f4bc77f4ec1b35630800b26ff6a185731c5ab"
 dependencies = [
  "revm-primitives",
  "serde",
+ "sha3 0.10.8 (git+https://github.com/ivokub/RustCrypto-hashes?rev=9facce43)",
 ]
 
 [[package]]
@@ -3101,7 +3100,6 @@ dependencies = [
  "bincode",
  "log",
  "rsp-client-executor",
- "sha3 0.10.8",
  "sp1-zkvm",
  "tracing",
 ]
@@ -3415,6 +3413,7 @@ dependencies = [
 [[package]]
 name = "sha3"
 version = "0.10.8"
+source = "git+https://github.com/sp1-patches/RustCrypto-hashes?tag=patch-sha3-0.10.8-sp1-4.0.0#8f6d303c0861ba7e5adcc36207c0f41fe5edaabc"
 dependencies = [
  "digest 0.10.7",
  "keccak",
@@ -3423,10 +3422,11 @@ dependencies = [
 [[package]]
 name = "sha3"
 version = "0.10.8"
-source = "git+https://github.com/sp1-patches/RustCrypto-hashes?tag=patch-sha3-0.10.8-sp1-4.0.0#8f6d303c0861ba7e5adcc36207c0f41fe5edaabc"
+source = "git+https://github.com/ivokub/RustCrypto-hashes?rev=9facce43#9facce43a9b132314e0b62080afb9305d6228b40"
 dependencies = [
  "digest 0.10.7",
  "keccak",
+ "sp1-zkvm",
 ]
 
 [[package]]
