@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "bin/host",
+    "bin/cachemaker",
     "crates/executor/client",
     "crates/executor/host",
     "crates/mpt",

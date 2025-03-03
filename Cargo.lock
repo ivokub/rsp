@@ -1120,6 +1120,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "cachemaker"
+version = "0.1.0"
+dependencies = [
+ "alloy-provider",
+ "bincode",
+ "clap",
+ "dotenv",
+ "eyre",
+ "futures",
+ "op-alloy-network",
+ "reth-evm",
+ "reth-primitives",
+ "rsp-client-executor",
+ "rsp-host-executor",
+ "rsp-primitives",
+ "rsp-rpc-db",
+ "serde",
+ "sp1-helper",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "url",
+]
+
+[[package]]
 name = "camino"
 version = "1.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
