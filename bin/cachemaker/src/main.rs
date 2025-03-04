@@ -76,7 +76,11 @@ async fn main() -> eyre::Result<()> {
         )
     });
 
-    futures::future::try_join_all(futures).await?;
+    for future in futures::future::join_all(futures).await {
+        if let Err(e) = future {
+            tracing::error!("Execution failed: {:?}", e);
+        }
+    }
 
     Ok(())
 }
@@ -109,8 +113,16 @@ where
         let rpc_db = RpcDb::new(provider.clone(), block_number - 1);
 
         // Execute the host.
-        let client_input =
-            host_executor.execute(block_number, &rpc_db, &provider, genesis, None).await?;
+        let client_input = match host_executor
+            .execute(block_number, &rpc_db, &provider, genesis.clone(), None)
+            .await
+        {
+            Ok(input) => input,
+            Err(_) => {
+                tracing::warn!("Execution failed for block {}, retrying...", block_number);
+                host_executor.execute(block_number, &rpc_db, &provider, genesis, None).await?
+            }
+        };
 
         let input_folder = cache_dir.join(format!("input/{}", chain_id));
         if !input_folder.exists() {
