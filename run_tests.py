@@ -26,23 +26,26 @@ def run_benchmark(executable, args, env_vars, stdout_path, stderr_path):
 
 def main():
     parser = argparse.ArgumentParser(description="Run benchmarks for executables.")
+    parser.add_argument("--chain-id", type=int, default=1, help="Chain ID to run the benchmarks for (default 1).")
     parser.add_argument("--cache-dir", type=str, required=True, help="Path to the cache directory.")
     parser.add_argument("--report-dir", type=str, required=True, help="Path to the report directory.")
-    parser.add_argument("--number_of_runs", type=int, default=1, help="Number of runs for each block.")
+    parser.add_argument("--number-of-runs", type=int, default=1, help="Number of runs for each block.")
     parser.add_argument("--limit-block-count", type=int, help="Limit the number of blocks to run.")
+    parser.add_argument("--optional-arg", type=str, help="Optional argument to pass to the executable.")
+    parser.add_argument("executables", nargs='+', help="List of executables to run.")
     args = parser.parse_args()
 
     num_runs = args.number_of_runs
     limit_block_count = args.limit_block_count
     cache_dir = Path(args.cache_dir)
     report_dir = Path(args.report_dir)
+    executables = args.executables
+    optional_arg = args.optional_arg
 
-    executables = ['./rsp-cuda-constrained-sha3']
-    #executables = ['./rsp-cuda-constrained-sha3', './rsp-cuda-unconstrained-sha3']
     env_vars = {
         'CUDA_VISIBLE_DEVICES': '0', # use only first device for now
         'SP1_PROVER': 'cuda', # use cuda backend for SP1
-        }
+    }
     input_dir = cache_dir / 'input/1'
 
     block_numbers = sorted([p.stem for p in input_dir.glob('*.bin')])
@@ -61,16 +64,20 @@ def main():
                     print(f"Skipping {executable} (Block {block_number}, Run {run_nr}) as it is already done.")
                     continue
                 
-                args = [
-                    '--chain-id', '1',
+                args_list = [
+                    '--chain-id', args.chain_id,
                     '--cache-dir', str(cache_dir),
                     '--block-number', block_number,
                     '--report-path', f'{report_dir}/{executable_name}/{block_number}-{run_nr}-report.csv',
                     '--prove'
                 ]
+
+                if optional_arg:
+                    args_list.append(optional_arg)
+
                 stdout_path.parent.mkdir(parents=True, exist_ok=True)
                 
-                run_benchmark(executable, args, env_vars, stdout_path, stderr_path)
+                run_benchmark(executable, args_list, env_vars, stdout_path, stderr_path)
                 
                 # Create the done file to indicate completion
                 done_path.touch()
