@@ -46,7 +46,7 @@ def main():
         'CUDA_VISIBLE_DEVICES': '0', # use only first device for now
         'SP1_PROVER': 'cuda', # use cuda backend for SP1
     }
-    input_dir = cache_dir / 'input/1'
+    input_dir = cache_dir / 'input/' / str(args.chain_id)
 
     block_numbers = sorted([p.stem for p in input_dir.glob('*.bin')])
     if limit_block_count:
